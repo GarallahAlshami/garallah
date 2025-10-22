@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>عالم جارالله | الموقع الرسمي</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+  <style>
+    :root{
+      --txt:#e9f6ff; --muted:#a6b7d8; --glass:rgba(255,255,255,.08); --brd:rgba(255,255,255,.18);
+      --neon:#00ff95; --neon2:#00e5ff; --vio:#8b5cf6; --gold:#ffd166; --bg:#05070f;
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:"Cairo",system-ui,Segoe UI,Roboto,sans-serif;
+      color:var(--txt); background:#000; overflow-x:hidden; scroll-behavior:smooth;
+    }
+
+    /* خلفية Matrix */
+    #matrix{position:fixed; inset:0; z-index:-3; background:#000;}
+    .color-fog{position:fixed; inset:-10vh -10vw; z-index:-2; filter:blur(90px); opacity:.25; pointer-events:none;
+      background:conic-gradient(from 0deg, #00ff95, #00e5ff, #8b5cf6, #00ff95); animation:spin 18s linear infinite;}
+    @keyframes spin{to{transform:rotate(1turn)}}
+
+    /* رأس الصفحة */
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(140%) blur(14px);
+      background:linear-gradient(180deg, rgba(5,7,20,.9), rgba(5,7,20,.45));
+      border-bottom:1px solid var(--brd);
+    }
+    .nav{
+      max-width:1200px; margin:auto; padding:12px 18px;
+      display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    }
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:#fff}
+    .orb{
+      width:52px; height:52px; border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, var(--neon2), var(--vio) 60%, #000 62%);
+      box-shadow: inset -8px -10px 20px rgba(0,0,0,.55), 0 0 36px rgba(0,229,255,.35);
+      animation:float 5s ease-in-out infinite;
+    }
+    @keyframes float{50%{transform:translateY(-6px) rotateZ(1.2deg)}}
+    .logo{
+      font-weight:900; letter-spacing:.4px; line-height:1.05; font-size:clamp(18px,2.1vw,22px);
+      background:linear-gradient(120deg,#fff 10%, var(--neon2) 45%, var(--vio) 70%, #fff);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow:0 0 14px rgba(0,229,255,.3), 0 0 30px rgba(139,92,246,.25);
+    }
+    .logo small{display:block; font-weight:700; font-size:.8em; color:#cfeeff}
+
+    nav.links{display:flex; gap:10px; flex:1; flex-wrap:wrap}
+    nav.links a{
+      display:inline-flex; align-items:center; gap:8px;
+      color:var(--muted); text-decoration:none; font-weight:800;
+      padding:8px 12px; border-radius:14px; border:1px solid transparent; transition:.25s;
+      font-size:clamp(13px,1.3vw,15px);
+    }
+    nav.links a:hover{color:#fff; border-color:var(--brd); background:var(--glass); transform:translateY(-2px)}
+    nav.links a.active{color:var(--gold); border-color:var(--gold); box-shadow:0 0 18px rgba(255,209,102,.28) inset}
+
+    .cta{
+      display:inline-flex; align-items:center; gap:8px; font-weight:900;
+      padding:10px 14px; border-radius:14px; text-decoration:none;
+      color:#001b1b; background:linear-gradient(135deg, var(--neon) , var(--neon2));
+      box-shadow:0 10px 26px rgba(0,229,255,.25);
+      border:1px solid #00e5ff55;
+    }
+
+    
+    .hero{
+      max-width:1200px; margin:auto; padding:28px 18px 12px; text-align:center;
+    }
+    .hero h1{
+      margin:22px 0 10px; font-size:clamp(28px,6.5vw,56px); font-weight:900;
+      letter-spacing:.5px; transform:perspective(900px) rotateX(8deg) rotateY(-6deg);
+      color:#eaffff;
+      text-shadow: 0 0 12px #00ffe0, 0 0 28px #00e5ff, 0 0 52px #8b5cf6, 0 18px 40px rgba(0,0,0,.6);
+      animation:neonPulse 2.6s ease-in-out infinite;
+    }
+    @keyframes neonPulse{
+      50%{ text-shadow:0 0 18px #00ffe0, 0 0 42px #00e5ff, 0 0 70px #8b5cf6, 0 22px 50px rgba(0,0,0,.7) }
+    }
+    .tagline{color:#cfe7ff; font-weight:700; margin:6px 0 14px}
+    .myst{color:#83ffd3; font-weight:900}
+
+    main{max-width:1200px; margin:auto; padding:8px 18px 70px}
+    section{min-height:70vh; padding:28px 0}
+    .section-title{
+      font-size:clamp(22px,3.2vw,34px); margin:0 0 10px; text-shadow:0 0 12px rgba(0,229,255,.25)
+    }
+    .section-desc{color:var(--muted); margin:0 0 18px}
+
+    .grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border:1px solid var(--brd); border-radius:var(--radius); padding:16px;
+      position:relative; overflow:hidden;
+      box-shadow:0 24px 60px rgba(0,0,0,.45);
+      transform-style:preserve-3d; transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+    .card:hover{transform:translateY(-6px) rotateY(6deg); box-shadow:0 26px 70px rgba(0,0,0,.55)}
+
+    .badges{display:flex; gap:10px; flex-wrap:wrap; justify-content:center}
+    .badge{padding:8px 12px; border-radius:14px; border:1px solid var(--brd); background:var(--glass);
+      font-weight:800; color:#dff7ff; display:inline-flex; gap:8px; align-items:center}
+
+    /* أكواد */
+    pre{direction:ltr; text-align:left; background:#030a0a; color:#cfe; padding:14px; border-radius:12px; overflow:auto; border:1px solid #0d3333}
+    code .k{color:#9cdcfe} code .f{color:#ffd166} code .s{color:#59f2a6}
+
+    /* تواصل */
+    .social-row{display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:center}
+    .social{
+      display:flex; align-items:center; gap:10px; padding:12px 16px; border-radius:14px;
+      border:1px solid var(--brd); background:var(--glass); text-decoration:none; color:#fff; font-weight:900;
+      transition:.25s; min-width:180px; justify-content:center
+    }
+    .social i{font-size:22px}
+    .social:hover{transform:translateY(-4px) scale(1.03)}
+    .whatsapp{border-color:#25d36655; box-shadow:0 0 0 0 rgba(37,211,102,.35); }
+    .whatsapp:hover{box-shadow:0 0 30px rgba(37,211,102,.35) inset}
+    .instagram:hover{box-shadow:0 0 30px rgba(193,53,132,.35) inset}
+    .facebook:hover{box-shadow:0 0 30px rgba(24,119,242,.35) inset}
+    .email:hover{box-shadow:0 0 30px rgba(255,209,102,.35) inset}
+
+    /* إظهار عند التمرير */
+    .reveal{opacity:0; transform:translateY(16px); transition: .6s ease}
+    .reveal.show{opacity:1; transform:none}
+
+    footer{
+      border-top:1px solid var(--brd);
+      background:linear-gradient(180deg, rgba(5,7,20,.25), rgba(5,7,20,.7))
+    }
+    .foot{
+      max-width:1200px; margin:auto; padding:20px 18px;
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:space-between;
+      font-size:clamp(12px,1.1vw,14px); color:var(--muted)
+    }
+    .signature{font-weight:900; color:#fff; text-shadow:0 0 12px rgba(0,229,255,.35)}
+
+    @media (max-width:760px){
+      .cta{display:none}
+      nav.links{overflow:auto; white-space:nowrap}
+    }
+  </style>
+</head>
+<body>
+  <!-- خلفية Matrix -->
+  <canvas id="matrix"></canvas>
+  <div class="color-fog"></div>
+
+  <!-- شريط علوي -->
+  <header>
+    <div class="nav">
+      <a class="brand" href="#home">
+        <span class="orb"></span>
+        <span class="logo">
+          جارالله ياسر محسن قاسم الشامي
+          <small>مطور واجهات |
+          ومصمم مواقع ويب </small>
+        </span>
+      </a>
+      <nav class="links" id="topnav">
+        <a href="#home" class="active"><i class="fa-solid fa-house"></i><span>الرئيسية</span></a>
+        <a href="#about"><i class="fa-solid fa-user"></i><span>عنّي</span></a>
+        <a href="#langs"><i class="fa-solid fa-code"></i><span>لغات البرمجة</span></a>
+        <a href="#repair"><i class="fa-solid fa-screwdriver-wrench"></i><span>الصيانة</span></a>
+        <a href="#certs"><i class="fa-solid fa-award"></i><span>الشهادات</span></a>
+        <a href="#projects"><i class="fa-solid fa-diagram-project"></i><span>المشاريع</span></a>
+        <a href="#contact"><i class="fa-solid fa-paper-plane"></i><span>تواصل</span></a>
+      </nav>
+      <a class="cta" href="https://wa.me/967777830766" target="_blank"><i class="fa-brands fa-whatsapp"></i> تواصل الآن</a>
+    </div>
+  </header>
+
+  
+  <section class="hero" id="home">
+    <h1 class="reveal"> جارالله  ياسر الشامي   «ملك الظلام 💀» »  </h1>
+<h1
+>
+  "The Dark King 💀" 
+</h1
+>
+
+    <p class="tagline reveal">“<span class="myst" id="typewrite"></span>”</p>
+    <div class="badges reveal">
+      <span class="badge"><i class="fa-solid fa-bolt"></i> تحليل انظمة </span>
+      <span class="badge"><i class="fa-solid fa-cube"></i> صيانة انظمة</span>
+      <span class="badge"><i class="fa-solid fa-wand-magic-sparkles"></i> ادوات واكواد برمجية </span>
+    </div>
+  </section>
+
+  <main>
+    
+    <section id="about" class="reveal">
+      <h2 class="section-title"><i class="fa-solid fa-user"></i> عنّي</h2>
+      <p class="section-desc">أنا جار الله ياسر محسن قاسم الشامي، عمري 20 سنة، طالب بكلية الحاسوب – جامعة صنعاء (المستوى الثاني).
+      ولدت في محافظةالضالع مديرية دمت ودرست في مدرسة  ومجمع الفلاح التربوي 
+      
+      
+      </p>
+      <div class="grid">
+        <div class="card"><h3>رسالتي</h3><p>أن يهتم كل شخص بشغفه، ويجتهد في دراسته، ليصنع مستقبلاً يليق بأحلامه.</p></div>
+        <div class="card"><h3>ما أقدّمه</h3><p>تعليم لغات برمجة، تصميم مواقع وصفحات ومتاجر إلكترونية، تطوير الألعاب، تحليل البيانات، صيانة وتطوير الأنظمة.</p></div>
+        <div class="card"><h3>رؤيتي</h3><p>أن يبدو كل موقع “هادئًا وفخمًا” — سريعًا، عميقًا بصريًا، وواضحًا للمستخدم.</p></div>
+      </div>
+    </section>
+
+    <!-- لغات البرمجة -->
+    <section id="langs" class="reveal">
+      <h2 class="section-title"><i class="fa-solid fa-code"></i> لغات البرمجة</h2>
+      <p class="section-desc">“إن فهمت المنطق… سيصبح العالم الرقمي قابلًا للترويض.”</p>
+      <div class="grid">
+        <div class="card">
+          <h3><i class="fa-brands fa-html5"></i> HTML</h3>
+          <p>لغة بناء الهيكل.</p>
+<pre><code>&lt;!-- تبويب بسيط --&gt;
+&lt;header&gt;
+  &lt;h1&gt;مرحبا بالعالم&lt;/h1&gt;
+&lt;/header&gt;</code></pre>
+        </div>
+        <div class="card">
+          <h3><i class="fa-brands fa-css3-alt"></i> CSS</h3>
+          <p>هوية الألوان والجمال.</p>
+<pre><code>/* زر أنيق */
+.button{
+  padding:10px 14px; border-radius:12px;
+  background:#0ff2; color:#e9f6ff; border:1px solid #0ff5;
+}</code></pre>
+        </div>
+        <div class="card">
+          <h3><i class="fa-brands fa-js"></i> JavaScript</h3>
+          <p>لغة التحكم بالحياة داخل الصفحة.</p>
+<pre><code>// تأثير كتابة
+const msg = "العقل يُبرمج الفوضى";
+let i=0; const el=document.querySelector('#demo');
+setInterval(()=>{ el.textContent = msg.slice(0, ++i % (msg.length+1)); }, 120);</code></pre>
+        </div>
+        <div class="card">
+          <h3><i class="fa-brands fa-python"></i> Python</h3>
+          <p>لغة الذكاء والتحليل.</p>
+<pre><code># جمع بسيط
+def add(a,b): return a+b
+print(add(5,7))</code></pre>
+        </div>
+        <div class="card">
+          <h3><i class="fa-solid fa-code"></i> C++</h3>
+          <p>أداء عالٍ للأنظمة الثقيلة.</p>
+<pre><code>#include &lt;iostream&gt;
+int main(){ std::cout &lt;&lt; "Hi"; }</code></pre>
+        </div>
+        <div class="card">
+          <h3><i class="fa-brands fa-php"></i> PHP</h3>
+          <p>قلب الخوادم الشائع.</p>
+<pre><code>&lt;?php echo "قوة السيرفر"; ?&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- الصيانة -->
+    <section id="repair" class="reveal">
+      <h2 class="section-title"><i class="fa-solid fa-screwdriver-wrench"></i> الصيانة والبرمجة للهواتف</h2>
+      <div class="grid">
+        <div class="card"><h3>Android</h3><p>تفليش رومات رسمية، حل Bootloop، صيانة الهاردوير، والنسخ الاحتياطي.</p></div>
+        <div class="card"><h3>iPhone</h3><p>Recovery/DFU، مشاكل التحديث، حماية البيانات، وصيانة النظام، اكتشاف الثغرات .</p></div>
+        <div class="card"><h3>تطبيقات</h3><p>Android (Kotlin/Java)، iOS (Swift)، Cross-Platform (Flutter/React Native).</p></div>
+      </div>
+    </section>
+
+    <!-- الشهادات -->
+    <section id="certs" class="reveal">
+      <h2 class="section-title"><i class="fa-solid fa-award"></i> الشهادات</h2>
+      <div class="grid">
+        <div class="card"><h3><i class="fa-solid fa-mobile-screen"></i> دبلوم صيانة وبرمجة الهاتف</h3><p>تشخيص وإصلاح على أسس عملية، حماية انظمة شركات، .</p></div>
+        <div class="card"><h3><i class="fa-solid fa-id-card"></i> الرخصة الدولية لقيادة الحاسوب</h3><p>إتقان الأساسيات والإنتاجية، معلم في الصيانة والبرمجه، تعليم برمجة على اسس علمية .</p></div>
+        <div class="card"><h3><i class="fa-solid fa-users"></i> التنمية البشرية</h3><p>تنظيم الوقت والعرض الفعّال.</p></div>
+        <div class="card"><h3><i class="fa-solid fa-kit-medical"></i> الإسعافات الأولية</h3><p>استجابة أولية سليمة.</p></div>
+      </div>
+    </section>
+
+    <!-- المشاريع -->
+    <section id="projects" class="reveal">
+      <h2 class="section-title"><i class="fa-solid fa-diagram-project"></i> المشاريع</h2>
+      <p class="section-desc">مساحة لعرض مواقع ومتاجر، لوحات بيانات، وعناصر تفاعلية.</p>
+      <div class="grid">
+        <div class="card"><h3>مواقع ومتاجر</h3><p>واجهات متجاوبة بتجربة سلسة.</p></div>
+        <div class="card"><h3>لوحات بيانات</h3><p>تحليل وبصيرة سريعة لاتخاذ القرار.</p></div>
+        <div class="card"><h3>نماذج ألعاب</h3><p>تفاعل ممتع وتحسين أداء.</p></div>
+      </div>
+    </section>
+
+    <!-- تواصل -->
+    <section id="contact" class="reveal">
+      <h2 class="section-title"><i class="fa-solid fa-paper-plane"></i> تواصل معي</h2>
+      <div class="social-row">
+        <a class="social whatsapp" href="https://wa.me/967777830766" target="_blank"><i class="fa-brands fa-whatsapp"></i> واتساب: 777830766</a>
+        <a class="social instagram" href="https://instagram.com/jrq05" target="_blank"><i class="fa-brands fa-instagram"></i> إنستجرام: jrq05</a>
+        <a class="social facebook" href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i> فيسبوك: جارالله الشامي</a>
+        <a class="social email" href="mailto:abnalshami711@gmail.com"><i class="fa-solid fa-envelope"></i> إيميل: abnalshami711@gmail.com</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot">
+      <span>© <span id="year"></span> جميع الحقوق محفوظة.</span>
+      <span class="signature">صُمم بإبداع بواسطة المبرمج جارالله  ياسر الشامي </span>
+    </div>
+  </footer>
+
+  <script>
+    // السنة
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // تمييز الرابط النشط في الشريط
+    const sections = [...document.querySelectorAll('section[id]')];
+    const navLinks = [...document.querySelectorAll('#topnav a')];
+    const spy = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          const id = e.target.id;
+          navLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href') === '#'+id));
+        }
+      });
+    },{rootMargin:"-40% 0px -55% 0px", threshold:0});
+    sections.forEach(s=>spy.observe(s));
+
+    // إظهار العناصر عند التمرير
+    const revealObs = new IntersectionObserver(es=>{
+      es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); revealObs.unobserve(e.target);} });
+    },{threshold:.15});
+    document.querySelectorAll('.reveal, .card').forEach(el=>revealObs.observe(el));
+
+    // تأثير كتابة لعبارات غامضة
+    const phrases = [
+      "العالم الإلكتروني ليس مجرد كود… إنه لغة تتنفس بين الأسطر",
+      "إذا فهمت المنطق… ستسيطر على الفوضى",
+      "حين تصمت الواجهة تتكلم الخوارزميات",
+      "كل بايت يحمل سراً… وكل خط يفتح بوابة"
+    ];
+    const tw = document.getElementById('typewrite');
+    let pi = 0, ci = 0, back = false;
+    function typeLoop(){
+      const p = phrases[pi];
+      tw.textContent = p.slice(0, ci);
+      if(!back){ ci++; if(ci > p.length + 10){ back = true; } }
+      else { ci--; if(ci === 0){ back = false; pi = (pi+1)%phrases.length; } }
+      setTimeout(typeLoop, back? 35 : 70);
+    }
+    typeLoop();
+
+    // Matrix Rain
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    const katakana = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン';
+    const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const glyphs = (katakana + latin).split('');
+    let w, h, cols, drops;
+    function resize(){
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      cols = Math.floor(w / 18);
+      drops = new Array(cols).fill(1);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+    function draw(){
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#00ff95';
+      ctx.font = '16px monospace';
+      for(let i=0;i<drops.length;i++){
+        const text = glyphs[Math.floor(Math.random()*glyphs.length)];
+        ctx.fillText(text, i*18, drops[i]*18);
+        if(drops[i]*18 > h && Math.random() > 0.94){ drops[i]=0; }
+        drops[i]++;
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  </script>
+</body>
+  </html>https://garallahalshami.github.io/garallah/
